@@ -20,19 +20,19 @@ pipeline {
          stage("docker build"){
              steps{
         sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:v1.$BUILD_ID'
-        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:latest'
+        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID koteswarararaosairi/$JOB_NAME:v1.$BUILD_ID'
+        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID koteswarararaosairi/$JOB_NAME:latest'
              }
          }
          stage("push Image: DOCKERHUB"){
              steps{
                  withCredentials([string(credentialsId: 'docker_pwd', variable: 'docker_passwd')]) {
-                 sh "docker login -u vikashashoke -p ${docker_passwd}"
-                sh 'docker image push vikashashoke/$JOB_NAME:v1.$BUILD_ID'
-                sh 'docker image push vikashashoke/$JOB_NAME:latest'
+                 sh "docker login -u koteswarararaosairi -p ${docker_passwd}"
+                sh 'docker image push koteswarararaosairi/$JOB_NAME:v1.$BUILD_ID'
+                sh 'docker image push koteswarararaosairi/$JOB_NAME:latest'
                //A number of images will get stored into our jenkins server so need to remove prev build images
                 //local images,taged images & latest images all delete 
-              sh 'docker image rm $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:latest'
+              sh 'docker image rm $JOB_NAME:v1.$BUILD_ID koteswarararaosairi/$JOB_NAME:v1.$BUILD_ID koteswarararaosairi/$JOB_NAME:latest'
               }
              }
          }
