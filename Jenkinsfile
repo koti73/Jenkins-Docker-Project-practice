@@ -12,8 +12,8 @@ pipeline {
          stage("Sending docker file to ansible server"){
             steps{
                 sshagent(['ansible']) {
-                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.32.215'
-                 sh 'scp /var/lib/jenkins/workspace/docker_image/* ubuntu@172.31.32.215:/opt/ansible'
+                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.54.248'
+                 sh 'scp /var/lib/jenkins/workspace/docker_image/* ubuntu@172.31.54.248:/opt/ansible'
                 }
             }
         }
